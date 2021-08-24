@@ -60,5 +60,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This permission is required to save your generated memes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This permission is required to access images from the photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This permission is required to click images before converting them into memes</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>impact.ttf</string>
+	</array>
 </dict>
 </plist>
