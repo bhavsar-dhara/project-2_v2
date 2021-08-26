@@ -133,8 +133,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             if let popOver = imagePicker.popoverPresentationController {
                 popOver.permittedArrowDirections = UIPopoverArrowDirection.up
                 popOver.sourceView = self.view
-                //popOver.sourceRect =
-                //popOver.barButtonItem
             }
         } else {
             print("Not an iPhone or iPad - Unspecified device")
@@ -233,7 +231,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
+        // Hide toolbar and navbar
         topNavBar.isHidden = true
         bottomStackView.isHidden = true
         
@@ -243,7 +241,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
-        // TODO: Show toolbar and navbar
+        // Show hidden toolbar and navbar
         topNavBar.isHidden = false
         bottomStackView.isHidden = false
         
@@ -264,8 +262,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if let popOver = activityController.popoverPresentationController {
             popOver.permittedArrowDirections = UIPopoverArrowDirection.up
             popOver.sourceView = self.view
-            //popOver.sourceRect =
-            //popOver.barButtonItem
         }
         
         // call methods with completion item handler
@@ -289,6 +285,9 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cancel(_ sender: Any) {
         print("Cancel updates")
-        // add implementation to show a pop before clearing out the updates with the default
+        // clearing out the image and text updates with the default
+        imageView.image = nil
+        topTextField.text = topDefaultTxt
+        bottomTextField.text = bottomDefaultTxt
     }
 }
