@@ -64,6 +64,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         textfield.tintColor = .black
         textfield.delegate = self
         textfield.text = textVal
+        view.bringSubviewToFront(textfield)
     }
 
     override func viewWillAppear(_ animated: Bool) {
