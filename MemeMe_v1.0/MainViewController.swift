@@ -35,15 +35,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     
     
-    // MARK: Required Meme struct
-    internal struct Meme {
-        let topText: String
-        let bottomText: String
-        let originalImage: UIImage
-        let memedImage: UIImage
-    }
-    
-    
     
     // MARK: Inherent Controller Methods
     override func viewDidLoad() {
@@ -57,11 +48,9 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             NSAttributedString.Key.strokeWidth: -5.0,
         ]
         
-        topTextField.text = topDefaultTxt
-        setTextFieldAttributes(textfield: topTextField, attributes: memeTextAttributes)
+        setTextFieldAttributes(textfield: topTextField, attributes: memeTextAttributes, textVal: topDefaultTxt)
         
-        bottomTextField.text = bottomDefaultTxt
-        setTextFieldAttributes(textfield: bottomTextField, attributes: memeTextAttributes)
+        setTextFieldAttributes(textfield: bottomTextField, attributes: memeTextAttributes, textVal: bottomDefaultTxt)
         
         share.isEnabled = false
 
@@ -69,11 +58,12 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         camera.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.5), for: .disabled)
     }
 
-    func setTextFieldAttributes(textfield: UITextField, attributes: [NSAttributedString.Key: Any]) {
+    func setTextFieldAttributes(textfield: UITextField, attributes: [NSAttributedString.Key: Any], textVal: String) {
         textfield.defaultTextAttributes = attributes
         textfield.textAlignment = .center
         textfield.tintColor = .black
         textfield.delegate = self
+        textfield.text = textVal
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +122,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
             if let popOver = imagePicker.popoverPresentationController {
                 popOver.permittedArrowDirections = UIPopoverArrowDirection.up
-                popOver.sourceView = self.view
+                popOver.sourceView = view
             }
         } else {
             print("Not an iPhone or iPad - Unspecified device")
@@ -193,10 +183,10 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @objc func keyboardWillShow(_ notification:Notification) {
         //Need to calculate keyboard exact size due to Apple suggestions
-        var aRect : CGRect = self.view.frame
+        var aRect : CGRect = view.frame
         let keyboardHeight = getKeyboardHeight(notification)
         aRect.size.height -= keyboardHeight
-        if let activeField = self.activeField {
+        if let activeField = activeField {
             if (!aRect.contains(activeField.frame.origin)){
                 view.frame.origin.y = -keyboardHeight
             }
@@ -227,7 +217,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // MARK: Save/Share functions
     func save() {
         // Create the meme for saving
-        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: self.memedImage!)
+        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage!)
     }
     
     func generateMemedImage() -> UIImage {
@@ -236,8 +226,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         bottomStackView.isHidden = true
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
@@ -250,24 +240,23 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
      
     @IBAction func shareMeme(_ sender: Any) {
         // generate a memed image
-        self.memedImage = generateMemedImage()
+        memedImage = generateMemedImage()
         
         // define an instance of the ActivityViewController
         // pass the ActivityViewController a memedImage as an activity item
-        let activityController = UIActivityViewController(activityItems: [self.memedImage!], applicationActivities: nil)
+        let activityController = UIActivityViewController(activityItems: [memedImage!], applicationActivities: nil)
                     
         // present the ActivityViewController
         present(activityController, animated: true, completion: nil)
         
         if let popOver = activityController.popoverPresentationController {
             popOver.permittedArrowDirections = UIPopoverArrowDirection.up
-            popOver.sourceView = self.view
+            popOver.sourceView = view
         }
         
         // call methods with completion item handler
         activityController.completionWithItemsHandler = {
-            (activityType: UIActivity.ActivityType?, completed:
-           Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            (_, completed: Bool, _, error: Error?) in
                if completed {
                     print("share completed")
                     // save the create meme as an instance of a custom object

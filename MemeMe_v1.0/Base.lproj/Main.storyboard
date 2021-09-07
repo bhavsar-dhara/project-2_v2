@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,11 +12,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MemeMe_v1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSA-OC-VYG" userLabel="Top Nav Bar">
-                                <rect key="frame" x="44" y="0.0" width="808" height="45"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="45"/>
                                 <items>
                                     <navigationItem id="yEH-ZV-MmC">
                                         <barButtonItem key="leftBarButtonItem" title="Share" image="square.and.arrow.up" catalog="system" id="C0y-mT-YRc">
@@ -33,7 +33,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSa-Se-xlA" userLabel="Bottom Text Field">
-                                <rect key="frame" x="59" y="233" width="778" height="40"/>
+                                <rect key="frame" x="15" y="702" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="FV4-7e-X5E"/>
                                 </constraints>
@@ -41,10 +41,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5W2-t7-ETd" userLabel="Bottom Stack View">
-                                <rect key="frame" x="44" y="348" width="808" height="45"/>
+                                <rect key="frame" x="0.0" y="817" width="414" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NT-83-M7S" userLabel="Camera">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="45"/>
                                         <state key="normal" title="Camera" image="camera" catalog="system">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -53,7 +53,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-Kf-wqH">
-                                        <rect key="frame" x="404" y="0.0" width="404" height="45"/>
+                                        <rect key="frame" x="207" y="0.0" width="207" height="45"/>
                                         <state key="normal" title="Album" image="photo" catalog="system">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -67,7 +67,7 @@
                                 </constraints>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ask-iB-JFC" userLabel="Top Text Field">
-                                <rect key="frame" x="59" y="120" width="778" height="40"/>
+                                <rect key="frame" x="15" y="164" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="IKy-eG-fbM"/>
                                 </constraints>
@@ -75,12 +75,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-Ur-Gfc">
-                                <rect key="frame" x="44" y="45" width="808" height="303"/>
+                                <rect key="frame" x="0.0" y="89" width="414" height="728"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="hSa-Se-xlA" firstAttribute="bottom" secondItem="5W2-t7-ETd" secondAttribute="top" constant="-75" id="6e4-2G-hi1"/>
+                            <constraint firstItem="Ask-iB-JFC" firstAttribute="top" secondItem="nSA-OC-VYG" secondAttribute="bottom" constant="15" id="7VF-JS-s9W"/>
                             <constraint firstItem="5W2-t7-ETd" firstAttribute="trailing" secondItem="nSA-OC-VYG" secondAttribute="trailing" id="BZw-u0-Hyh"/>
                             <constraint firstItem="5W2-t7-ETd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CSb-8y-RbF"/>
                             <constraint firstItem="Ask-iB-JFC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="DqX-s2-fcz"/>
@@ -98,10 +99,27 @@
                             <constraint firstItem="ckp-Ur-Gfc" firstAttribute="bottom" secondItem="5W2-t7-ETd" secondAttribute="top" id="noE-dq-RCN"/>
                             <constraint firstItem="Ask-iB-JFC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="nsX-5T-cXy"/>
                             <constraint firstItem="Ask-iB-JFC" firstAttribute="top" secondItem="nSA-OC-VYG" secondAttribute="bottom" constant="75" id="rlk-V6-UI4"/>
+                            <constraint firstItem="hSa-Se-xlA" firstAttribute="bottom" secondItem="5W2-t7-ETd" secondAttribute="top" id="tDh-GR-y0f">
+                                <variation key="widthClass=regular" constant="-15"/>
+                            </constraint>
                             <constraint firstItem="hSa-Se-xlA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="vLh-1v-tVF"/>
                             <constraint firstItem="ckp-Ur-Gfc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yCh-69-N6x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7VF-JS-s9W"/>
+                                <exclude reference="tDh-GR-y0f"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="7VF-JS-s9W"/>
+                                <exclude reference="rlk-V6-UI4"/>
+                                <exclude reference="6e4-2G-hi1"/>
+                                <include reference="tDh-GR-y0f"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="album" destination="Mba-Kf-wqH" id="yf3-Tc-7EJ"/>
