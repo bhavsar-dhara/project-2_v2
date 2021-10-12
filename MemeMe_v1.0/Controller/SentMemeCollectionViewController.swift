@@ -21,40 +21,44 @@ class SentMemeCollectionViewController: UICollectionViewController {
     
     
     
-    // MARK: Life Cycle
+    // MARK: Life Cycle methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView?.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        collectionView!.reloadData()
     }
     
     
     
     // MARK: Collection View Data Source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return self.memes.count
+        return self.memes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
-      let meme = self.memes[(indexPath as NSIndexPath).row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
+        let meme = self.memes[(indexPath as NSIndexPath).row]
       
-      // Set the image
-      cell.image?.image = meme.memedImage
+        // Set the image
+        cell.image?.image = meme.memedImage
       
-      return cell
+        return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-      let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-      detailController.meme = self.memes[(indexPath as NSIndexPath).row]
-      self.navigationController!.pushViewController(detailController, animated: true)
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = self.memes[(indexPath as NSIndexPath).row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
     
     // MARK: IBActions
     @IBAction func createMeme(_ sender: Any) {
         print("Create Meme")
-        let createMemeController = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeViewController") as! CreateMemeViewController
-        self.navigationController!.pushViewController(createMemeController, animated: true)
     }
         
 }

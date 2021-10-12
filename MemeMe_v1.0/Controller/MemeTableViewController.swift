@@ -21,6 +21,19 @@ class MemeTableViewController: UITableViewController {
     
     
     
+    // MARK: lifecycle methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = 44;
+        tableView?.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView!.reloadData()
+    }
+
+    
+    
     // MARK: Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.memes.count
@@ -33,11 +46,6 @@ class MemeTableViewController: UITableViewController {
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
         cell.imageView?.image = meme.memedImage
-        
-        // If the cell has a detail label, we will put the evil scheme in.
-        if let detailTextLabel = cell.detailTextLabel {
-            detailTextLabel.text = meme.topText + " " + meme.bottomText
-        }
         
         return cell
     }
@@ -52,8 +60,6 @@ class MemeTableViewController: UITableViewController {
     // MARK: IBActions
     @IBAction func createMeme(_ sender: Any) {
         print("Create Meme")
-        let createMemeController = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeViewController") as! CreateMemeViewController
-        self.navigationController!.pushViewController(createMemeController, animated: true)
     }
         
 }

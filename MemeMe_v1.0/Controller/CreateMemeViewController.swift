@@ -25,7 +25,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     
     var activeField: UITextField?
     var memedImage: UIImage!
-    
+    var priorVC: UITabBarController!
     
     
     // MARK: Default constants
@@ -88,10 +88,41 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         // unsubscribe to keyboard notifications
         unsubscribeFromKeyboardNotifications()
         subscribeToKeyboardNotificationsHide()
+        
+        //Reloading the Table/Collection Data Source
+        priorVC = presentingViewController as? UITabBarController
+        
+//        if let childVC = priorVC.selectedViewController as? UINavigationController {
+//            DispatchQueue.main.async {
+//                if let firstVC = childVC.topViewController as? MemeTableViewController {
+//                    print("table VC")
+//                    firstVC.tableView.reloadData()
+//                }
+//                if let secondVC = childVC.topViewController as? SentMemeCollectionViewController {
+//                    print("collection VC")
+//                    secondVC.collectionView.reloadData()
+//                }
+//            }
+//        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //Reloading the Table/Collection Data Source
+        if let childVC = priorVC.selectedViewController as? UINavigationController {
+            DispatchQueue.main.async {
+                if let firstVC = childVC.topViewController as? MemeTableViewController {
+                    firstVC.tableView.reloadData()
+                }
+                if let secondVC = childVC.topViewController as? SentMemeCollectionViewController {
+                    secondVC.collectionView.reloadData()
+                }
+            }
+        }
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -230,6 +261,9 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Add it to the memes array on the application delegate
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+        
+        // close the modal
+        self.dismiss(animated: true, completion: nil)
     }
     
     func generateMemedImage() -> UIImage {
@@ -270,7 +304,6 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         activityController.completionWithItemsHandler = {
             (_, completed: Bool, _, error: Error?) in
                if completed {
-                    print("share completed")
                     // save the create meme as an instance of a custom object
                     self.save()
                     activityController.dismiss(animated: true, completion: nil)
@@ -286,9 +319,13 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func cancel(_ sender: Any) {
         print("Cancel updates")
+        
         // clearing out the image and text updates with the default
         imageView.image = nil
         topTextField.text = topDefaultTxt
         bottomTextField.text = bottomDefaultTxt
+        
+        // close the modal
+        self.dismiss(animated: true, completion: nil)
     }
 }
