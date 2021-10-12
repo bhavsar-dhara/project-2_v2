@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     
     
@@ -35,6 +35,14 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     
     
+    //MARK: Fetch memes from shared model data
+    var memes : [Meme]! {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.memes
+    }
+    
+        
     
     // MARK: Inherent Controller Methods
     override func viewDidLoad() {
@@ -218,7 +226,10 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // MARK: Save/Share functions
     func save() {
         // Create the meme for saving
-        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage!)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage!)
+        
+        // Add it to the memes array on the application delegate
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage {
