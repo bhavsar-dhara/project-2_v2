@@ -24,12 +24,14 @@ class MemeDetailViewController: UIViewController {
     // MARK: Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Hiding the tabBar
         self.tabBarController?.tabBar.isHidden = true
         self.imageView!.image = meme.memedImage
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // showing the tabBar
         self.tabBarController?.tabBar.isHidden = false
     }
 }

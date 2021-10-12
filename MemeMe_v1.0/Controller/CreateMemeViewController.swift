@@ -92,21 +92,8 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         unsubscribeFromKeyboardNotifications()
         subscribeToKeyboardNotificationsHide()
         
-        //Reloading the Table/Collection Data Source
+        //Reloading the Table/Collection Data Source - assigning VC to a class parameter so it is accessible in viewDidDisappear method
         priorVC = presentingViewController as? UITabBarController
-        
-//        if let childVC = priorVC.selectedViewController as? UINavigationController {
-//            DispatchQueue.main.async {
-//                if let firstVC = childVC.topViewController as? MemeTableViewController {
-//                    print("table VC")
-//                    firstVC.tableView.reloadData()
-//                }
-//                if let secondVC = childVC.topViewController as? SentMemeCollectionViewController {
-//                    print("collection VC")
-//                    secondVC.collectionView.reloadData()
-//                }
-//            }
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -326,6 +313,6 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextField.text = bottomDefaultTxt
         
         // close the modal
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
